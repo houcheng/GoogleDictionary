@@ -1,4 +1,4 @@
-# Sublime Filefinder plugin
+# Sublime Google Dictionary plugin
 
 Introduction
 ------------
