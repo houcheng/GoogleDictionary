@@ -1,0 +1,5 @@
+[
+    // hot key to trigger file finder
+    { "command": "googledict", "keys": ["ctrl+b"] },
+    { "command": "googledictmode", "keys": ["ctrl+alt+b"] }
+]
