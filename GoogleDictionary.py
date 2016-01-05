@@ -6,12 +6,12 @@ from textblob import TextBlob
 
 from StatusDisplay import StatusDisplaySingleton
 from Setting import SettingSingleton
+from TipDisplay import TipDisplay
 from Timer import Timer, TimerTask
 import mdpopups
 
 '''
-reference popup from:
-show_color_info in ColorHelper.py
+reference popups:
 https://github.com/facelessuser/sublime-markdown-popups
 '''
 
@@ -22,25 +22,17 @@ class LazyLookup:
             self.text = text
         def doJob(self):
             self.view.erase_status("Googledict")
-            timeout = SettingSingleton.getInstance().get("status_display_period")
-            display = StatusDisplaySingleton.getInstance(timeout)
+            display = StatusDisplaySingleton.getInstance()
             display.set_status(self.view, "google in progress...", True)
             blob = TextBlob(self.text)
             try:
                 lang = SettingSingleton.getInstance().get('lang')
                 hello = blob.translate(to = lang)
-                display.set_status(self.view, hello.__str__(), True)
-                md = mdpopups.md2html(self.view, ''.join(['# ', hello.__str__()]))
-                mdpopups.show_popup(
-                    self.view, md,
-                    # css=util.ADD_CSS, location=-1, max_width=600, max_height=350,
-                    location=-1, max_width=600, max_height=350,
-                    # on_navigate=self.on_navigate,
-                    # on_hide=self.on_hide,
-                    flags=sublime.COOPERATE_WITH_AUTO_COMPLETE
-                )
+                display.clear(self.view)
+                TipDisplay.display(self.view, hello.__str__())
             except Exception as e:
-                display.set_status(self.view, "translate error!", True)
+                TipDisplay.display(self.view, "translate error!")
+                display.clear(self.view)
 
     def __init__(self):
         self.timer = Timer(0.5)
@@ -72,8 +64,7 @@ test word: 'hello world, This is captain picard!'
 class GoogledictCommand(sublime_plugin.TextCommand):
     lazyLookup = LazyLookup()
     def run(self, edit):
-        timeout = SettingSingleton.getInstance().get("status_display_period")
-        display = StatusDisplaySingleton.getInstance(timeout)
+        display = StatusDisplaySingleton.getInstance()
         selectionText = self.view.substr(self.view.sel()[0])
         self.lazyLookup.lookup(self.view, selectionText)
 

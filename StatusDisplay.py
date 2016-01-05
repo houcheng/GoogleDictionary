@@ -1,5 +1,5 @@
 import sublime, sublime_plugin
-
+import mdpopups
 from Timer import Timer, TimerTask
 
 class StatusDisplay:
@@ -33,7 +33,7 @@ class StatusDisplaySingleton:
     statusDisplay = None
 
     @staticmethod
-    def getInstance(timeout):
+    def getInstance(timeout=10):
         if StatusDisplaySingleton.statusDisplay == None:
             StatusDisplaySingleton.statusDisplay = StatusDisplay(timeout)
         return StatusDisplaySingleton.statusDisplay
