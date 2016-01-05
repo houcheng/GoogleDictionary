@@ -4,7 +4,7 @@
     // trasnlate target language
     "lang" : "zh-TW",
 
-    // display time of translated text.
+    // display time of translated text, in second.
     "status_display_period" : 10,
 }
 

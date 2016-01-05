@@ -7,6 +7,13 @@ from textblob import TextBlob
 from StatusDisplay import StatusDisplaySingleton
 from Setting import SettingSingleton
 from Timer import Timer, TimerTask
+import mdpopups
+
+'''
+reference popup from:
+show_color_info in ColorHelper.py
+https://github.com/facelessuser/sublime-markdown-popups
+'''
 
 class LazyLookup:
     class LazyLookupTask(TimerTask):
@@ -23,6 +30,15 @@ class LazyLookup:
                 lang = SettingSingleton.getInstance().get('lang')
                 hello = blob.translate(to = lang)
                 display.set_status(self.view, hello.__str__(), True)
+                md = mdpopups.md2html(self.view, ''.join(['# ', hello.__str__()]))
+                mdpopups.show_popup(
+                    self.view, md,
+                    # css=util.ADD_CSS, location=-1, max_width=600, max_height=350,
+                    location=-1, max_width=600, max_height=350,
+                    # on_navigate=self.on_navigate,
+                    # on_hide=self.on_hide,
+                    flags=sublime.COOPERATE_WITH_AUTO_COMPLETE
+                )
             except Exception as e:
                 display.set_status(self.view, "translate error!", True)
 
