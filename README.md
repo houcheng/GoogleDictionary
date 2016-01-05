@@ -6,21 +6,26 @@ Introduction
 With google dictionary plugin, user can translate selected text into 
 his lanauge by Google's translation service. First, user select
 the word or phrase needed to translte. Then, he press the google dictionary
-hot key, default is ctrl-b, and the translated text will be shown on
-the sublime status bar, in the left bottom corner of sublime window.
+hot key and the translated text will be shown.
 
-This plug-in also provides translate mode, when enter this mode by hot key
-ctrl-alt-b, every time when user select a phrase or word, the selected text
-would be translated and display on status bar at left-bottom corner.
+This plug-in also provides translate mode, when enter this mode by hot key every time when user select a phrase or word, the selected text
+would be translated.
 
 
-Usage
------
+Installation and usage
+----------------------
 
+Install and configure this plugin:
+
+- Install "google dictionary" by package control.
 - Set the "lang" in menu: /Preference/Packages/Google dictionary/Settings User.
+- Define hot-key for googledict and googledictmode command in menu: Preference/Key-Binding User
 - Restart sublime.
-- Select a phrase or word, then click "ctrl+b" to translate
-- Or use "ctrl+alt+b" to enter translate mode, then further select will be translated.
+
+To use the goodl dictionary:
+
+- Select a phrase or word, then press hot-key to translate
+- Or enter translate mode, then further select will be translated.
 
 
 Setting
@@ -32,9 +37,6 @@ Setting
 {
     // trasnlate target language
     "lang" : "zh-TW",
-
-    // display time of translated text.
-    "status_display_period" : 10,
 }
 ```
 
@@ -66,16 +68,16 @@ Supported lang include:
 - Spanish – es
 - Swedish – sv
 
-#### Default hot key
+#### Hot key setting
 
 ```
-    { "command": "googledict", "keys": ["ctrl+b"] },
-    { "command": "googledictmode", "keys": ["ctrl+alt+b"] }
+    { "command": "googledict", "keys": ["ctrl+t"] },
+    { "command": "googledictmode", "keys": ["ctrl+alt+t"] }
 ```
 
 
-Installation
-------------
+Usage of package control
+-------------------------
 
 Via the [Sublime Package Manager](http://wbond.net/sublime_packages/package_control):
 
