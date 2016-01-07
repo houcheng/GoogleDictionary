@@ -1,5 +1,7 @@
 # Sublime Google Dictionary plugin
 
+![Demo](demo.gif "Demo of google dictionary plugin")
+
 Introduction
 ------------
 
