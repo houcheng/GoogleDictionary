@@ -10,12 +10,55 @@ from TipDisplay import TipDisplay
 from Timer import Timer, TimerTask
 import mdpopups
 
+class VocRecorder:
+    def __init__(self):
+        self.voc = None
+        self.text = None
+        self.wordbank = None
+    def process(self, text, translated):
+        wordlist=text.strip().lstrip().split(' ')
+        if len(wordlist) == 1:
+            self.processVoc(wordlist[0], translated)
+        else:
+            self.processText(text)
+    def processText(self, text):
+        pass
+    def processVoc(self, word, translated):
+        if self.voc == None:
+            self.openFile()
+        if SettingSingleton.getInstance().get('vocabulary') == False:
+            return
+        if word in self.wordbank:
+            return
+        self.wordbank.add(word)
+        sep = ''
+        for t in range(4-int(len(word)/8)):
+            sep += '\t'
+        line = word + sep + translated + '\n'
+        self.voc.write(line)
+        self.voc.flush()
+    def reload(self):
+        try:
+            path = sublime.packages_path()+'/User/'
+            fd = open(path + 'vocabulary.txt', 'r')
+            for line in fd.readlines():
+                word = line.strip().split('\t')[0]
+                self.wordbank.add(word)
+        except Exception as e:
+            pass
+    def openFile(self):
+        self.wordbank = set()
+        self.reload()
+        path = sublime.packages_path()+'/User/'
+        self.voc = open(path + 'vocabulary.txt', 'a')
+
 '''
 reference popups:
 https://github.com/facelessuser/sublime-markdown-popups
 '''
 
 class LazyLookup:
+    recorder = VocRecorder()
     class LazyLookupTask(TimerTask):
         def __init__(self, view, text):
             self.view = view
@@ -33,7 +76,7 @@ class LazyLookup:
             except Exception as e:
                 TipDisplay.display(self.view, "translate error!")
                 display.clear(self.view)
-
+            LazyLookup.recorder.process(self.text, hello.__str__())
     def __init__(self):
         self.timer = Timer(0.5)
 

@@ -13,6 +13,9 @@ hot key and the translated text will be shown.
 This plug-in also provides translate mode, when enter this mode by hot key every time when user select a phrase or word, the selected text
 would be translated.
 
+Add vocabulary feature that auto record new word into vocabulary.txt, you 
+may find this file under menu "preference/package settings/google dictionay"
+By default, this feature is off.
 
 Installation and usage
 ----------------------

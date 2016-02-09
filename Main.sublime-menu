@@ -60,6 +60,14 @@
                                     "platform": "Linux"
                                 },
                                 "caption": "Key Bindings – User"
+                            },
+                            { "caption": "-" },
+                            {
+                                "command": "open_file", "args":
+                                {
+                                    "file": "${packages}/User/vocabulary.txt"
+                                },
+                                "caption": "Vocabulary"
                             }
                         ]
                     }

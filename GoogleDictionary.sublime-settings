@@ -6,6 +6,9 @@
 
     // display time of translated text, in second.
     "status_display_period" : 10,
+
+    "vocabulary" : false,
+
 }
 
 /* Language listing from https://en.wikipedia.org/wiki/Template:Google_translation
