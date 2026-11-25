@@ -42,7 +42,7 @@ def usage(obj, selfname='self'):
         if name.startswith('_'): continue
         if getattr(method, '__deprecated__', False): continue
 
-        args, varargs, varkw, defaults = inspect.getargspec(method)
+        args, varargs, varkw, defaults = inspect.getfullargspec(method)[:4]
         if (args and args[0]=='self' and
             (defaults is None or len(args)>len(defaults))):
             args = args[1:]

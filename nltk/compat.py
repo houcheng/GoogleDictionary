@@ -35,7 +35,10 @@ if PY3:
     _iterkeys = "keys"
     _itervalues = "values"
     _iteritems = "items"
-    from imp import reload
+    try:
+        from importlib import reload
+    except ImportError:  # Python 3.3
+        from imp import reload
     raw_input = input
 
     imap = map

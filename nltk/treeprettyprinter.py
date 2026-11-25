@@ -28,7 +28,9 @@ from nltk.tree import Tree
 import re
 import sys
 import codecs
-from cgi import escape
+from functools import partial
+from html import escape as _html_escape
+escape = partial(_html_escape, quote=False)  # cgi.escape replacement (cgi was removed in Python 3.13)
 from collections import defaultdict
 from operator import itemgetter
 from itertools import chain, islice

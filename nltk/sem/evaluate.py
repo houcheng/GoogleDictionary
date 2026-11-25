@@ -36,7 +36,7 @@ class Error(Exception): pass
 class Undefined(Error):  pass
 
 def trace(f, *args, **kw):
-    argspec = inspect.getargspec(f)
+    argspec = inspect.getfullargspec(f)
     d = dict(zip(argspec[0], args))
     if d.pop('trace', None):
         print()
